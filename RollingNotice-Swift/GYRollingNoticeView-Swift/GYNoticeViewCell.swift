@@ -10,29 +10,53 @@ import UIKit
 
 open class GYNoticeViewCell: UIView {
     
-    open private(set) var contentView: UIView?
+    open var contentView: UIView? {
+        get {return _contentView}
+    }
+    fileprivate lazy var _contentView: UIView? = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        self.addSubview(view)
+        return view
+    }()
     
-    open private(set) var textLabel: UILabel?
+    open var textLabel: UILabel? {
+        get{return _textLabel}
+    }
+    fileprivate lazy var _textLabel: UILabel? = {
+        let lab = UILabel()
+        self._contentView!.addSubview(lab)
+        return lab
+    }()
     
-    @objc open private(set) var reuseIdentifier: String?
+    open var reuseIdentifier: String? {
+        get{return _reuseIdentifier}
+    }
+    @objc fileprivate var _reuseIdentifier: String?
+    
+    fileprivate var isFromXIB = false
     
     public required init(reuseIdentifier: String?){
         super.init(frame: CGRect.zero)
         print("init a cell from code: %p", self)
-        self.reuseIdentifier = reuseIdentifier
+        self._reuseIdentifier = reuseIdentifier
         setupInitialUI()
     }
     
     public required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
+        isFromXIB = true
         print("init a cell from xib")
     }
     
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        self.contentView?.frame = self.bounds
-        self.textLabel?.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+        if !isFromXIB {
+            self.contentView?.frame = self.bounds
+            self.textLabel?.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+        }
+        
     }
     
     deinit {
@@ -43,11 +67,5 @@ open class GYNoticeViewCell: UIView {
 extension GYNoticeViewCell{
     fileprivate func setupInitialUI() {
         self.backgroundColor = UIColor.white
-        self.contentView = UIView()
-        self.addSubview(self.contentView!)
-        self.textLabel = UILabel()
-        self.contentView?.addSubview(self.textLabel!)
-        
-        self.contentView?.backgroundColor = UIColor.white
     }
 }

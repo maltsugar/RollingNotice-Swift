@@ -63,7 +63,7 @@ open class GYRollingNoticeView: UIView {
             if let nib = cellCls as? UINib {
                 let arr = nib.instantiate(withOwner: nil, options: nil)
                 let cell = arr.first as! GYNoticeViewCell
-                cell.setValue(identifier, forKeyPath: "reuseIdentifier")
+                cell.setValue(identifier, forKeyPath: "_reuseIdentifier")
                 return cell
             }
             
