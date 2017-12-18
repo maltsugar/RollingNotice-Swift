@@ -46,8 +46,8 @@ extension GYNoticeViewCell{
         self.contentView = UIView()
         self.addSubview(self.contentView!)
         self.textLabel = UILabel()
-        self.contentView?.addSubview(self.textLabel!)
+        self.contentView!.addSubview(self.textLabel!)
         
-        self.contentView?.backgroundColor = UIColor.white
+        self.contentView!.backgroundColor = UIColor.white
     }
 }
