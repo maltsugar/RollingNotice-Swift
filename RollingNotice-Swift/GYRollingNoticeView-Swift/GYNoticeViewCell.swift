@@ -10,11 +10,22 @@ import UIKit
 
 open class GYNoticeViewCell: UIView {
     
-    open private(set) var contentView: UIView?
+    open private(set) lazy var contentView: UIView? = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        self.addSubview(view)
+        isAddedContentView = true
+        return view
+    }()
     
-    open private(set) var textLabel: UILabel?
+    open private(set) lazy var textLabel: UILabel? = {
+        let lab = UILabel()
+        self.contentView!.addSubview(lab)
+        return lab
+    }()
     
     @objc open private(set) var reuseIdentifier: String?
+    fileprivate var isAddedContentView = false
     
     public required init(reuseIdentifier: String?){
         super.init(frame: CGRect.zero)
@@ -31,8 +42,11 @@ open class GYNoticeViewCell: UIView {
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        self.contentView?.frame = self.bounds
-        self.textLabel?.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+        if isAddedContentView {
+            self.contentView!.frame = self.bounds
+            self.textLabel!.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+        }
+        
     }
     
     deinit {
@@ -43,11 +57,5 @@ open class GYNoticeViewCell: UIView {
 extension GYNoticeViewCell{
     fileprivate func setupInitialUI() {
         self.backgroundColor = UIColor.white
-        self.contentView = UIView()
-        self.addSubview(self.contentView!)
-        self.textLabel = UILabel()
-        self.contentView!.addSubview(self.textLabel!)
-        
-        self.contentView!.backgroundColor = UIColor.white
     }
 }

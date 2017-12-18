@@ -38,7 +38,7 @@ class ViewController: UIViewController {
         creatRoolingViewWith(arr: arr1!, isFirst: false)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.arr1 = ["zzzzzz", "aaaaa", "bbbbb", "ccccc", "ddddd", "eeeeee"]
+            self.arr1 = ["数据源刷新后", "aaaaa", "bbbbb", "ccccc", "ddddd", "eeeeee"]
             self.noticeView1?.reloadDataAndStartRoll()
         }
         
