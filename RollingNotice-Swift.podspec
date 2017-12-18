@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
 
   s.name         = "RollingNotice-Swift"
   s.version      = "1.0"
-  s.summary      = "仿淘宝头条，滚动公告 A rolling banner, custom cell like UITableViewCell supported"
+  s.summary      = "仿淘宝头条，滚动公告.OC Swift双版本 A rolling banner, custom cell like UITableViewCell supported"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #  the deployment target. You can optionally include the target after the platform.
   #
 
-  s.platform     = :ios
+  s.platform     = :ios, "8.0"
   # s.platform     = :ios, "5.0"
 
   #  When using multiple platforms
@@ -92,7 +92,7 @@ Pod::Spec.new do |s|
   #  Not including the public_header_files will make all headers public.
   #
 
-  s.source_files  = "GYRollingNoticeView", "RollingNotice/GYRollingNoticeView/*.{h,m}"
+  s.source_files  = "GYRollingNoticeView", "RollingNotice-Swift/GYRollingNoticeView-Swift/*.{swift}"
   s.framework  = "UIKit"
 
   # s.public_header_files = "Classes/**/*.h"

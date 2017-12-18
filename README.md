@@ -1,8 +1,8 @@
 # Rolling Notice、Rolling Advertisement
-![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Objective--C-orange.svg) ![](https://img.shields.io/cocoapods/v/RollingNotice.svg?style=flat) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
+![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Swift-orange.svg) ![](https://img.shields.io/cocoapods/v/RollingNotice-Swift.svg?style=flat) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
 
 ##### [Objective-C Version](https://github.com/maltsugar/RollingNotice)
-### Introduce[中文介绍](https://github.com/maltsugar/RollingNotice-Swift/blob/master/README_Zh.md)
+### Introduce(for swift 4.0)[中文介绍](https://github.com/maltsugar/RollingNotice-Swift/blob/master/README_Zh.md)
 This library can scroll any view, scroll up and down the notice, advertising. It can be very flexible, similar to UITableViewCell.
 You only need to customize the view and assin value according to the index, roll will be done by it!
 
@@ -16,8 +16,8 @@ You only need to customize the view and assin value according to the index, roll
 
 Issues are welcome, hope you like it!
 ### Usage
-- manual: drag `GYRollingNoticeView` in your project
-- Cocoapods: `pod 'RollingNotice', '~> 1.0.2'`
+- manual: drag `GYRollingNoticeView-Swift` in your project
+- Cocoapods: `pod 'RollingNotice-Swift', '~> 1.0'`
  
 **customized cell must inherit `GYNoticeViewCell`.**
 
