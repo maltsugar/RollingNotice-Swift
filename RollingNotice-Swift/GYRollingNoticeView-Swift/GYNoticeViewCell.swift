@@ -17,11 +17,12 @@ open class GYNoticeViewCell: UIView {
         let view = UIView()
         view.backgroundColor = UIColor.white
         self.addSubview(view)
+        isAddedContentView = true
         return view
     }()
     
     open var textLabel: UILabel? {
-        get{return _textLabel}
+        get {return _textLabel}
     }
     fileprivate lazy var _textLabel: UILabel? = {
         let lab = UILabel()
@@ -34,7 +35,7 @@ open class GYNoticeViewCell: UIView {
     }
     @objc fileprivate var _reuseIdentifier: String?
     
-    fileprivate var isFromXIB = false
+    fileprivate var isAddedContentView = false
     
     public required init(reuseIdentifier: String?){
         super.init(frame: CGRect.zero)
@@ -45,14 +46,13 @@ open class GYNoticeViewCell: UIView {
     
     public required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
-        isFromXIB = true
         print("init a cell from xib")
     }
     
     override open func layoutSubviews() {
         super.layoutSubviews()
         
-        if !isFromXIB {
+        if isAddedContentView {
             self.contentView?.frame = self.bounds
             self.textLabel?.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
         }
