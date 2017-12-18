@@ -1,5 +1,5 @@
 # 滚动公告、广告
-![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Objective--C-orange.svg) ![](https://img.shields.io/cocoapods/v/RollingNotice-Swift.svg?style=flat) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
+![](https://img.shields.io/badge/platform-iOS-red.svg) ![](https://img.shields.io/badge/language-Objective--C-orange.svg) ![](https://img.shields.io/cocoapods/v/RollingNotice.svg?style=flat) ![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
 
 ##### [Objective-C 版本](https://github.com/maltsugar/RollingNotice)
 ### 经历
@@ -22,8 +22,8 @@
 几乎和UITableView一样的体验，自定义cell的话`必须`继承`GYNoticeViewCell`，你只管自定义你的View，并根据index赋值，轮播交给它。
 具体用法demo 里有的！
 
-- 手动下载: `GYRollingNoticeView-Swift`拖进去
-- Cocoapods: `pod 'RollingNotice-Swift', '~> 1.0'`
+- 手动下载: `GYRollingNoticeView`拖进去
+- Cocoapods: `pod 'RollingNotice', '~> 1.0.2'`
 
 
 ![](http://wx3.sinaimg.cn/mw690/72aba7efgy1fmdy022ow6g20bn08g0xn.gif)
@@ -32,4 +32,3 @@
 GYRollingNoticeView 使用 MIT 许可证，详情见 LICENSE 文件。
 
 
- 
