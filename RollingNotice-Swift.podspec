@@ -16,8 +16,8 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "RollingNotice-Swift"
-  s.version      = "1.0"
-  s.summary      = "仿淘宝头条，滚动公告.OC Swift双版本 A rolling banner, custom cell like UITableViewCell supported"
+  s.version      = "1.0.1"
+  s.summary      = "滚动公告、广告，支持灵活自定义cell。淘宝、口碑、京东、美团、天猫等等一切滚动广告 Roll Notice or Advertising. A rolling banner, custom cell like UITableViewCell supported"
 
   # This description is used to generate tags and improve search results.
   #   * Think: What does it do? Why did you write it? What is the focus?
@@ -81,7 +81,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/maltsugar/RollingNotice-Swift.git", :tag => "1.0" }
+  s.source       = { :git => "https://github.com/maltsugar/RollingNotice-Swift.git", :tag => "1.0.1" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #

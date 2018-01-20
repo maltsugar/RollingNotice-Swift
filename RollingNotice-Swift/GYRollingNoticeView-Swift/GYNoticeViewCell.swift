@@ -8,6 +8,9 @@
 
 import UIKit
 
+
+let GYRollingDebugLog = false
+
 open class GYNoticeViewCell: UIView {
     
     open private(set) lazy var contentView: UIView? = {
@@ -29,14 +32,19 @@ open class GYNoticeViewCell: UIView {
     
     public required init(reuseIdentifier: String?){
         super.init(frame: CGRect.zero)
-        print("init a cell from code: %p", self)
+        
+        if GYRollingDebugLog {
+            print("init a cell from code: %p", self)
+        }
         self.reuseIdentifier = reuseIdentifier
         setupInitialUI()
     }
     
     public required init?(coder aDecoder: NSCoder){
         super.init(coder: aDecoder)
-        print("init a cell from xib")
+        if GYRollingDebugLog {
+            print("init a cell from xib")
+        }
     }
     
     override open func layoutSubviews() {
@@ -50,7 +58,10 @@ open class GYNoticeViewCell: UIView {
     }
     
     deinit {
-        print(#function)
+        
+        if GYRollingDebugLog {
+            print(#function)
+        }
     }
 }
 

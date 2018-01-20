@@ -41,7 +41,7 @@ open class GYRollingNoticeView: UIView {
     private var currentIndex = 0
     private var currentCell: GYNoticeViewCell?
     private var willShowCell: GYNoticeViewCell?
-    
+    private var isAnimating = false
     
     // MARK: -
     open func register(_ cellClass: Swift.AnyClass?, forCellReuseIdentifier identifier: String) {
@@ -98,7 +98,7 @@ open class GYRollingNoticeView: UIView {
             timer = nil
         }
         
-        
+        isAnimating = false
         currentIndex = 0
         currentCell?.removeFromSuperview()
         willShowCell?.removeFromSuperview()
@@ -126,12 +126,16 @@ open class GYRollingNoticeView: UIView {
 extension GYRollingNoticeView{
     
     @objc fileprivate func timerHandle() {
+        if isAnimating {
+            return
+        }
         layoutCurrentCellAndWillShowCell()
         currentIndex += 1
         
         let w = self.frame.size.width
         let h = self.frame.size.height
         
+        isAnimating = true
         UIView.animate(withDuration: 0.5, animations: {
             self.currentCell?.frame = CGRect.init(x: 0, y: -h, width: w, height: h)
             self.willShowCell?.frame = CGRect.init(x: 0, y: 0, width: w, height: h)
@@ -141,6 +145,7 @@ extension GYRollingNoticeView{
                 cell0.removeFromSuperview()
                 self.currentCell = cell1
             }
+            self.isAnimating = false
         }
     }
     
@@ -173,13 +178,14 @@ extension GYRollingNoticeView{
         }
         
         
-        
-//        print("currentCell  %p", currentCell!)
         willShowCell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: willShowIndex)
-//        print("willShowCell %p", willShowCell!)
-        
         willShowCell?.frame = CGRect.init(x: 0, y: h, width: w, height: h)
         self.addSubview(willShowCell!)
+        
+        if GYRollingDebugLog {
+            print("currentCell  %p", currentCell!)
+            print("willShowCell %p", willShowCell!)
+        }
         
         let currentCellIdx = self.reuseCells.index(of: currentCell!)
         let willShowCellIdx = self.reuseCells.index(of: willShowCell!)
