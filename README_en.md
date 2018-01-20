@@ -18,7 +18,7 @@ You only need to customize the view and assin value according to the index, roll
 Issues are welcome, hope you like it!
 ### Usage
 - manual: drag `GYRollingNoticeView-Swift` in your project
-- Cocoapods: `pod 'RollingNotice-Swift', '~> 1.0.1'`
+- Cocoapods: `pod 'RollingNotice-Swift'`
  
 **customized cell must inherit `GYNoticeViewCell`.**
 

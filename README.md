@@ -34,7 +34,7 @@
 具体用法demo 里有的！
 
 - 手动下载: `GYRollingNoticeView-Swift`拖进去
-- Cocoapods: `pod 'RollingNotice-Swift', '~> 1.0.1'`
+- Cocoapods: `pod 'RollingNotice-Swift'`
 
 
 ![](http://wx3.sinaimg.cn/mw690/72aba7efgy1fmdy022ow6g20bn08g0xn.gif)
