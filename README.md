@@ -1,6 +1,6 @@
 # 滚动公告、广告
 
-![](https://img.shields.io/badge/platform-iOS-red.svg)&nbsp;![](https://img.shields.io/badge/language-Objective--C-orange.svg)&nbsp;[![CocoaPods](http://img.shields.io/cocoapods/v/RollingNotice-Swift.svg?style=flat)](http://cocoapods.org/pods/RollingNotice-Swift)&nbsp;![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
+![](https://img.shields.io/badge/platform-iOS-red.svg)&nbsp;![](https://img.shields.io/badge/language-Swift-orange.svg)&nbsp;[![CocoaPods](http://img.shields.io/cocoapods/v/RollingNotice-Swift.svg?style=flat)](http://cocoapods.org/pods/RollingNotice-Swift)&nbsp;![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
 
 ##### [English](https://github.com/maltsugar/RollingNotice-Swift/blob/master/README_en.md)
 ##### [Objective-C 版本](https://github.com/maltsugar/RollingNotice)
