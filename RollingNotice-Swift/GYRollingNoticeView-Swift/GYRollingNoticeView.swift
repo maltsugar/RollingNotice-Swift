@@ -24,10 +24,6 @@ open class GYRollingNoticeView: UIView {
     open var stayInterval = 2.0
     
     // MARK: private properties
-    private lazy var gyTapGesture = {() -> UITapGestureRecognizer in
-        let tap = UITapGestureRecognizer.init(target: self, action: #selector(GYRollingNoticeView.handleCellTapAction))
-        return tap
-    }()
     private lazy var cellClsDict: Dictionary = { () -> [String : Any] in
         var tempDict = Dictionary<String, Any>()
         return tempDict
@@ -111,13 +107,13 @@ open class GYRollingNoticeView: UIView {
     override public init(frame: CGRect) {
         super.init(frame: frame)
         self.clipsToBounds = true
-        self.addGestureRecognizer(self.gyTapGesture)
+        self.addGestureRecognizer(self.createTapGesture())
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         self.clipsToBounds = true
-        self.addGestureRecognizer(self.gyTapGesture)
+        self.addGestureRecognizer(self.createTapGesture())
     }
     
 }
@@ -208,6 +204,11 @@ extension GYRollingNoticeView{
         }
         self.delegate?.rollingNoticeView?(self, didClickAt: currentIndex)
     }
+    
+    fileprivate func createTapGesture() -> UITapGestureRecognizer {
+        return UITapGestureRecognizer.init(target: self, action: #selector(GYRollingNoticeView.handleCellTapAction))
+    }
+    
 }
 
 
