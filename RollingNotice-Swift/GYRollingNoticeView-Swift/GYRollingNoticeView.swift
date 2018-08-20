@@ -34,7 +34,7 @@ open class GYRollingNoticeView: UIView {
     }()
     
     private var timer: Timer?
-    private var currentIndex = 0
+    private(set) var currentIndex = 0
     private var currentCell: GYNoticeViewCell?
     private var willShowCell: GYNoticeViewCell?
     private var isAnimating = false
@@ -86,7 +86,7 @@ open class GYRollingNoticeView: UIView {
         RunLoop.current.add(timer!, forMode: .commonModes)
     }
     
-    // 在合适的地方停止timer。 you must stop it when not use,for example '-viewDidDismiss'
+    // 如果想要释放，请在合适的地方停止timer。 If you want to release, please stop the timer in the right place,for example '-viewDidDismiss'
     open func stopRoll() {
         
         if let rollTimer = timer {
@@ -106,14 +106,15 @@ open class GYRollingNoticeView: UIView {
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
-        self.clipsToBounds = true
-        self.addGestureRecognizer(self.createTapGesture())
+        self.setupNoticeViews()
     }
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        self.clipsToBounds = true
-        self.addGestureRecognizer(self.createTapGesture())
+        self.setupNoticeViews()
+    }
+    
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
     
 }
@@ -203,6 +204,11 @@ extension GYRollingNoticeView{
             currentIndex = 0;
         }
         self.delegate?.rollingNoticeView?(self, didClickAt: currentIndex)
+    }
+    
+    fileprivate func setupNoticeViews() {
+        self.clipsToBounds = true
+        self.addGestureRecognizer(self.createTapGesture())
     }
     
     fileprivate func createTapGesture() -> UITapGestureRecognizer {

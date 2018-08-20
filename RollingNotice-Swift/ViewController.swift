@@ -106,8 +106,8 @@ extension ViewController: GYRollingNoticeViewDelegate, GYRollingNoticeViewDataSo
             
             let cell = roolingView.dequeueReusableCell(withIdentifier: "CustomNoticeCell2") as! CustomNoticeCell2
             let dic = arr0![index]
-            cell.lab0.text = ((dic["arr"] as! Array).first as Dictionary! )["title"]
-            cell.lab1.text = ((dic["arr"] as! Array).last as Dictionary! )["title"]
+            cell.lab0.text = ((dic["arr"] as! Array).first as Dictionary? )!["title"]
+            cell.lab1.text = ((dic["arr"] as! Array).last as Dictionary? )!["title"]
             return cell
             
         }else
@@ -126,7 +126,7 @@ extension ViewController: GYRollingNoticeViewDelegate, GYRollingNoticeViewDataSo
     
     
     func rollingNoticeView(_ roolingView: GYRollingNoticeView, didClickAt index: Int) {
-         print("did click index: \(index)")
+         print("did click index: \(roolingView.currentIndex)")
     }
     
     
