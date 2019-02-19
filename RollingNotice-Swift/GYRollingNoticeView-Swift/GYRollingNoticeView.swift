@@ -22,6 +22,7 @@ open class GYRollingNoticeView: UIView {
     weak open var dataSource : GYRollingNoticeViewDataSource?
     weak open var delegate : GYRollingNoticeViewDelegate?
     open var stayInterval = 2.0
+    open private(set) var currentIndex = 0
     
     // MARK: private properties
     private lazy var cellClsDict: Dictionary = { () -> [String : Any] in
@@ -34,7 +35,6 @@ open class GYRollingNoticeView: UIView {
     }()
     
     private var timer: Timer?
-    private(set) var currentIndex = 0
     private var currentCell: GYNoticeViewCell?
     private var willShowCell: GYNoticeViewCell?
     private var isAnimating = false
@@ -83,7 +83,7 @@ open class GYRollingNoticeView: UIView {
         }
         
         timer = Timer.scheduledTimer(timeInterval: stayInterval, target: self, selector: #selector(GYRollingNoticeView.timerHandle), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: .commonModes)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     // 如果想要释放，请在合适的地方停止timer。 If you want to release, please stop the timer in the right place,for example '-viewDidDismiss'
