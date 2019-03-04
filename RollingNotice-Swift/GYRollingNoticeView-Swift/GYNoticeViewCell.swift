@@ -13,7 +13,7 @@ let GYRollingDebugLog = false
 
 open class GYNoticeViewCell: UIView {
     
-    open private(set) lazy var contentView: UIView? = {
+    open private(set) lazy var contentView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
         self.addSubview(view)
@@ -21,9 +21,9 @@ open class GYNoticeViewCell: UIView {
         return view
     }()
     
-    open private(set) lazy var textLabel: UILabel? = {
+    open private(set) lazy var textLabel: UILabel = {
         let lab = UILabel()
-        self.contentView!.addSubview(lab)
+        self.contentView.addSubview(lab)
         return lab
     }()
     
@@ -51,8 +51,8 @@ open class GYNoticeViewCell: UIView {
         super.layoutSubviews()
         
         if isAddedContentView {
-            self.contentView!.frame = self.bounds
-            self.textLabel!.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+            self.contentView.frame = self.bounds
+            self.textLabel.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
         }
         
     }

@@ -50,7 +50,8 @@ open class GYRollingNoticeView: UIView {
     
     open func dequeueReusableCell(withIdentifier identifier: String) -> GYNoticeViewCell? {
         for cell in self.reuseCells {
-            if cell.reuseIdentifier!.elementsEqual(identifier) {
+            guard let reuseIdentifier = cell.reuseIdentifier else { return nil }
+            if reuseIdentifier.elementsEqual(identifier) {
                 return cell
             }
         }
@@ -58,9 +59,11 @@ open class GYRollingNoticeView: UIView {
         if let cellCls = self.cellClsDict[identifier] {
             if let nib = cellCls as? UINib {
                 let arr = nib.instantiate(withOwner: nil, options: nil)
-                let cell = arr.first as! GYNoticeViewCell
-                cell.setValue(identifier, forKeyPath: "reuseIdentifier")
-                return cell
+                if let cell = arr.first as? GYNoticeViewCell {
+                    cell.setValue(identifier, forKeyPath: "reuseIdentifier")
+                    return cell
+                }
+                return nil
             }
             
             if let noticeCellCls = cellCls as? GYNoticeViewCell.Type {
@@ -76,14 +79,19 @@ open class GYRollingNoticeView: UIView {
         stopRoll()
         layoutCurrentCellAndWillShowCell()
         
-        let count = self.dataSource?.numberOfRowsFor(roolingView: self)
+        guard let count = self.dataSource?.numberOfRowsFor(roolingView: self) else {
+            return
+        }
         
-        guard count! >= 2 else {
+        guard count >= 2 else {
             return
         }
         
         timer = Timer.scheduledTimer(timeInterval: stayInterval, target: self, selector: #selector(GYRollingNoticeView.timerHandle), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: .common)
+        if let __timer = timer {
+            RunLoop.current.add(__timer, forMode: .common)
+        }
+        
     }
     
     // 如果想要释放，请在合适的地方停止timer。 If you want to release, please stop the timer in the right place,for example '-viewDidDismiss'
@@ -148,7 +156,7 @@ extension GYRollingNoticeView{
     
     
     fileprivate func layoutCurrentCellAndWillShowCell() {
-        let count = (self.dataSource?.numberOfRowsFor(roolingView: self))!
+        guard let count = (self.dataSource?.numberOfRowsFor(roolingView: self)) else { return }
         
         if (currentIndex > count - 1) {
             currentIndex = 0
@@ -168,24 +176,34 @@ extension GYRollingNoticeView{
         if currentCell == nil {
             // 第一次没有currentcell
             // currentcell is null at first time
-            currentCell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: currentIndex)
-            currentCell!.frame  = CGRect.init(x: 0, y: 0, width: w, height: h)
-            self.addSubview(currentCell!)
+            if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: currentIndex) {
+                currentCell = cell
+                cell.frame  = CGRect.init(x: 0, y: 0, width: w, height: h)
+                self.addSubview(cell)
+            }
+            
             return
         }
         
         
-        willShowCell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: willShowIndex)
-        willShowCell?.frame = CGRect.init(x: 0, y: h, width: w, height: h)
-        self.addSubview(willShowCell!)
-        
-        if GYRollingDebugLog {
-            print("currentCell  %p", currentCell!)
-            print("willShowCell %p", willShowCell!)
+        if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: willShowIndex) {
+            willShowCell = cell
+            cell.frame = CGRect.init(x: 0, y: h, width: w, height: h)
+            self.addSubview(cell)
         }
         
-        let currentCellIdx = self.reuseCells.index(of: currentCell!)
-        let willShowCellIdx = self.reuseCells.index(of: willShowCell!)
+        
+        
+        guard let _cCell = currentCell, let _wCell = willShowCell else {
+            return
+        }
+        if GYRollingDebugLog {
+            print("currentCell  %p", _cCell)
+            print("willShowCell %p", _wCell)
+        }
+        
+        let currentCellIdx = self.reuseCells.index(of: _cCell)
+        let willShowCellIdx = self.reuseCells.index(of: _wCell)
         
         if let index = currentCellIdx {
             self.reuseCells.remove(at: index)
@@ -198,9 +216,11 @@ extension GYRollingNoticeView{
     }
     
     @objc fileprivate func handleCellTapAction(){
-        let count = self.dataSource?.numberOfRowsFor(roolingView: self)
+        guard let count = self.dataSource?.numberOfRowsFor(roolingView: self) else {
+            return
+        }
         
-        if (currentIndex > count! - 1) {
+        if (currentIndex > count - 1) {
             currentIndex = 0;
         }
         self.delegate?.rollingNoticeView?(self, didClickAt: currentIndex)

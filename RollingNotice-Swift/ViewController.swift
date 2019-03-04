@@ -113,10 +113,10 @@ extension ViewController: GYRollingNoticeViewDelegate, GYRollingNoticeViewDataSo
         }else
         {
             let cell = roolingView.dequeueReusableCell(withIdentifier: "GYNoticeViewCell")
-            cell!.textLabel?.text = arr1![index]
-            cell!.contentView?.backgroundColor = UIColor.red
+            cell!.textLabel.text = arr1![index]
+            cell!.contentView.backgroundColor = UIColor.red
             if index % 2 == 0 {
-                cell!.contentView?.backgroundColor = UIColor.orange
+                cell!.contentView.backgroundColor = UIColor.orange
             }
             
             return cell!
