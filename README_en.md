@@ -3,7 +3,7 @@
 ![](https://img.shields.io/badge/platform-iOS-red.svg)&nbsp;![](https://img.shields.io/badge/language-Swift-orange.svg)&nbsp;[![CocoaPods](http://img.shields.io/cocoapods/v/RollingNotice-Swift.svg?style=flat)](http://cocoapods.org/pods/RollingNotice-Swift)&nbsp;![](https://img.shields.io/badge/license-MIT%20License-brightgreen.svg)
 
 ##### [Objective-C Version](https://github.com/maltsugar/RollingNotice)
-### Introduce(for swift 4.2)
+### Introduce(for Swfit 4.0+)
 This library can scroll any view, scroll up and down the notice, advertising. It can be very flexible, similar to UITableViewCell.
 You only need to customize the view and assin value according to the index, roll will be done by it!
 
@@ -19,7 +19,7 @@ Issues are welcome, hope you like it!
 ### Usage
 - manual: drag `GYRollingNoticeView-Swift` in your project
 - Cocoapods: `pod 'RollingNotice-Swift'`
- 
+
 **customized cell must inherit `GYNoticeViewCell`.**
 
 For more details, see the demo project. Just similar as UITableView.
@@ -32,4 +32,4 @@ GYRollingNoticeView is provided under the MIT license. See LICENSE file for deta
 
 
 
- 
+
