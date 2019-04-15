@@ -202,8 +202,8 @@ extension GYRollingNoticeView{
             print("willShowCell %p", _wCell)
         }
         
-        let currentCellIdx = self.reuseCells.index(of: _cCell)
-        let willShowCellIdx = self.reuseCells.index(of: _wCell)
+        let currentCellIdx = self.reuseCells.firstIndex(of: _cCell)
+        let willShowCellIdx = self.reuseCells.firstIndex(of: _wCell)
         
         if let index = currentCellIdx {
             self.reuseCells.remove(at: index)
