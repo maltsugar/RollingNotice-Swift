@@ -30,11 +30,11 @@ class CustomNoticeCell: GYNoticeViewCell {
     public func noticeCellWith(array: Array<Dictionary<String,Any> >, forIndex index: Int) {
         let dic = array[index]
         tailIconImgView.image = UIImage.init(named: dic["img"] as! String)
-        tagLab0.text = ((dic["arr"] as! Array).first as Dictionary! )["tag"]
-        titleLab0.text = ((dic["arr"] as! Array).first as Dictionary! )["title"]
+        tagLab0.text = ((dic["arr"] as! Array<Dictionary<String,Any> >).first as! Dictionary)["tag"]
+        titleLab0.text = ((dic["arr"] as! Array<Dictionary<String,Any> >).first as! Dictionary)["title"]
         
-        tagLab1.text = ((dic["arr"] as! Array).last as Dictionary! )["tag"]
-        titleLab1.text = ((dic["arr"] as! Array).last as Dictionary! )["title"]
+        tagLab1.text = ((dic["arr"] as! Array<Dictionary<String,Any> >).last as! Dictionary)["tag"]
+        titleLab1.text = ((dic["arr"] as! Array<Dictionary<String,Any> >).last as! Dictionary)["title"]
 
     }
     
