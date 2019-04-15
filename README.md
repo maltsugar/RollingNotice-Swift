@@ -6,7 +6,7 @@
 ##### [Objective-C 版本](https://github.com/maltsugar/RollingNotice)
 
 
-#### (for Swfit 4.0+)
+#### (for Swfit 4.2+)
 
 ### 版本记录
 - 1.0.5 demo类支持Swift 5.0， 库文件本身就支持Swift 5.0
