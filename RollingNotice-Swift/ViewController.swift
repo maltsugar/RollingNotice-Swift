@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     var arr1: Array<String>?
     var noticeView0: GYRollingNoticeView?
     var noticeView1: GYRollingNoticeView?
+    var noticeView1LabLeading = CGFloat(30)
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +41,7 @@ class ViewController: UIViewController {
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
             self.arr1 = ["数据源刷新后", "aaaaa", "bbbbb", "ccccc", "ddddd", "eeeeee"]
+            self.noticeView1LabLeading = 10
             self.noticeView1?.reloadDataAndStartRoll()
         }
         
@@ -118,6 +121,7 @@ extension ViewController: GYRollingNoticeViewDelegate, GYRollingNoticeViewDataSo
             if index % 2 == 0 {
                 cell!.contentView.backgroundColor = UIColor.orange
             }
+            cell?.textLabelLeading = noticeView1LabLeading
             
             return cell!
         }

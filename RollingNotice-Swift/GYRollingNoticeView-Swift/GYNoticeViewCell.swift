@@ -30,20 +30,35 @@ open class GYNoticeViewCell: UIView {
     @objc open private(set) var reuseIdentifier: String?
     fileprivate var isAddedContentView = false
     
-    public required init(reuseIdentifier: String?){
-        super.init(frame: CGRect.zero)
+    
+    /// leading >= 0
+    open var textLabelLeading: CGFloat
+    /// trailing >= 0
+    open var textLabelTrailing: CGFloat
+    
+    
+    public required init(reuseIdentifier: String?, textLabelLeading: CGFloat = 10, textLabelTrailing: CGFloat = 10){
+        
+        self.textLabelLeading = textLabelLeading
+        self.textLabelTrailing = textLabelTrailing
+        self.reuseIdentifier = reuseIdentifier
+        
+        
+        super.init(frame: .zero)
         
         if GYRollingDebugLog {
-            print("init a cell from code: %p", self)
+            print(String(format: "init a cell from code: %p", self))
         }
-        self.reuseIdentifier = reuseIdentifier
+        
         setupInitialUI()
     }
     
     public required init?(coder aDecoder: NSCoder){
+        self.textLabelLeading = 10
+        self.textLabelTrailing = 10
         super.init(coder: aDecoder)
         if GYRollingDebugLog {
-            print("init a cell from xib")
+            print(String(format: "init a cell from xib: %p", self))
         }
     }
     
@@ -52,7 +67,21 @@ open class GYNoticeViewCell: UIView {
         
         if isAddedContentView {
             self.contentView.frame = self.bounds
-            self.textLabel.frame = CGRect.init(x: 10, y: 0, width: self.frame.size.width - 20, height: self.frame.size.height)
+            var lead = textLabelLeading
+            if lead < 0 {
+                lead = 0
+            }
+            var trai = textLabelTrailing
+            if trai < 0 {
+                trai = 0
+            }
+
+            var width = self.frame.size.width - textLabelLeading - textLabelTrailing
+            if width < 0 {
+                width = 0
+            }
+            
+            self.textLabel.frame = CGRect(x: lead, y: 0, width: width, height: self.frame.size.height)
         }
         
     }
@@ -60,7 +89,7 @@ open class GYNoticeViewCell: UIView {
     deinit {
         
         if GYRollingDebugLog {
-            print(#function)
+            print(String(format: "cell deinit %p", self))
         }
     }
 }

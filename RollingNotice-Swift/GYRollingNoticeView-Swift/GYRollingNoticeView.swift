@@ -142,8 +142,8 @@ extension GYRollingNoticeView{
         
         isAnimating = true
         UIView.animate(withDuration: 0.5, animations: {
-            self.currentCell?.frame = CGRect.init(x: 0, y: -h, width: w, height: h)
-            self.willShowCell?.frame = CGRect.init(x: 0, y: 0, width: w, height: h)
+            self.currentCell?.frame = CGRect(x: 0, y: -h, width: w, height: h)
+            self.willShowCell?.frame = CGRect(x: 0, y: 0, width: w, height: h)
         }) { (flag) in
             if let cell0 = self.currentCell, let cell1 = self.willShowCell {
                 self.reuseCells.append(cell0)
@@ -178,7 +178,7 @@ extension GYRollingNoticeView{
             // currentcell is null at first time
             if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: currentIndex) {
                 currentCell = cell
-                cell.frame  = CGRect.init(x: 0, y: 0, width: w, height: h)
+                cell.frame  = CGRect(x: 0, y: 0, width: w, height: h)
                 self.addSubview(cell)
             }
             
@@ -188,7 +188,7 @@ extension GYRollingNoticeView{
         
         if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: willShowIndex) {
             willShowCell = cell
-            cell.frame = CGRect.init(x: 0, y: h, width: w, height: h)
+            cell.frame = CGRect(x: 0, y: h, width: w, height: h)
             self.addSubview(cell)
         }
         
@@ -198,8 +198,8 @@ extension GYRollingNoticeView{
             return
         }
         if GYRollingDebugLog {
-            print("currentCell  %p", _cCell)
-            print("willShowCell %p", _wCell)
+            print(String(format: "currentCell  %p", _cCell))
+            print(String(format: "willShowCell %p", _wCell))
         }
         
         let currentCellIdx = self.reuseCells.firstIndex(of: _cCell)
@@ -232,7 +232,7 @@ extension GYRollingNoticeView{
     }
     
     fileprivate func createTapGesture() -> UITapGestureRecognizer {
-        return UITapGestureRecognizer.init(target: self, action: #selector(GYRollingNoticeView.handleCellTapAction))
+        return UITapGestureRecognizer(target: self, action: #selector(GYRollingNoticeView.handleCellTapAction))
     }
     
 }

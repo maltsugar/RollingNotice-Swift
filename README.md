@@ -9,7 +9,7 @@
 #### (for Swfit 4.2+)
 
 ### 版本记录
-- 1.0.5 demo类支持Swift 5.0， 库文件本身就支持Swift 5.0
+- 1.0.6 demo类支持Swift 5.0
 - 1.0.4 库文件避免使用强制拆包，更加安全合理
 - 1.0.3 更新至Swift4.2
 - 1.0.2 支持xib创建滚动视图[#9](https://github.com/maltsugar/RollingNotice/issues/9)
