@@ -67,6 +67,7 @@ open class GYNoticeViewCell: UIView {
         
         if isAddedContentView {
             self.contentView.frame = self.bounds
+            
             var lead = textLabelLeading
             if lead < 0 {
                 lead = 0
@@ -76,11 +77,10 @@ open class GYNoticeViewCell: UIView {
                 trai = 0
             }
 
-            var width = self.frame.size.width - textLabelLeading - textLabelTrailing
+            var width = self.frame.size.width - lead - trai
             if width < 0 {
                 width = 0
             }
-            
             self.textLabel.frame = CGRect(x: lead, y: 0, width: width, height: self.frame.size.height)
         }
         

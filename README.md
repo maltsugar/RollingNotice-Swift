@@ -9,14 +9,12 @@
 #### (for Swfit 4.2+)
 
 ### 版本记录
+- 1.0.7 普通用法textLabel支持左右间距设置
 - 1.0.6 demo类支持Swift 5.0
 - 1.0.4 库文件避免使用强制拆包，更加安全合理
 - 1.0.3 更新至Swift4.2
 - 1.0.2 支持xib创建滚动视图[#9](https://github.com/maltsugar/RollingNotice/issues/9)
 - 1.0.1 修复极少数情况下，动画过程退到后台，可能出现残影的bug，感谢[@pcjbird](https://github.com/pcjbird)指出并帮忙修复
-
-
-
 
 
 
