@@ -77,11 +77,13 @@ open class GYRollingNoticeView: UIView {
     
     open func reloadDataAndStartRoll() {
         stopRoll()
-        layoutCurrentCellAndWillShowCell()
-        
-        guard let count = self.dataSource?.numberOfRowsFor(roolingView: self) else {
+        guard let count = self.dataSource?.numberOfRowsFor(roolingView: self), count > 0 else {
             return
         }
+        
+        layoutCurrentCellAndWillShowCell()
+        
+        
         
         guard count >= 2 else {
             return

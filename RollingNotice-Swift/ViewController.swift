@@ -75,7 +75,6 @@ extension ViewController {
             noticeView0 = noticeView
             noticeView.register(UINib.init(nibName: "CustomNoticeCell", bundle: nil), forCellReuseIdentifier: "CustomNoticeCell")
             noticeView.register(UINib.init(nibName: "CustomNoticeCell2", bundle: nil), forCellReuseIdentifier: "CustomNoticeCell2")
-            
         }else{
             noticeView1 = noticeView
             noticeView.register(GYNoticeViewCell.self, forCellReuseIdentifier: "GYNoticeViewCell")
