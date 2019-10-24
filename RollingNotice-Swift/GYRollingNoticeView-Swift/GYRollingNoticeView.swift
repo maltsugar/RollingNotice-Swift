@@ -17,12 +17,15 @@ import UIKit
     @objc optional func rollingNoticeView(_ roolingView: GYRollingNoticeView, didClickAt index: Int)
 }
 
-
+public enum GYRollingNoticeViewStatus: UInt {
+    case idle, working, pause
+}
 open class GYRollingNoticeView: UIView {
     weak open var dataSource : GYRollingNoticeViewDataSource?
     weak open var delegate : GYRollingNoticeViewDelegate?
     open var stayInterval = 2.0
     open private(set) var currentIndex = 0
+    open private(set) var status: GYRollingNoticeViewStatus = .idle
     
     // MARK: private properties
     private lazy var cellClsDict: Dictionary = { () -> [String : Any] in
@@ -93,6 +96,7 @@ open class GYRollingNoticeView: UIView {
         if let __timer = timer {
             RunLoop.current.add(__timer, forMode: .common)
         }
+        resume()
         
     }
     
@@ -104,6 +108,7 @@ open class GYRollingNoticeView: UIView {
             timer = nil
         }
         
+        status = .idle
         isAnimating = false
         currentIndex = 0
         currentCell?.removeFromSuperview()
@@ -111,6 +116,20 @@ open class GYRollingNoticeView: UIView {
         currentCell = nil
         willShowCell = nil
         self.reuseCells.removeAll()
+    }
+    
+    open func pause() {
+        if let __timer = timer {
+            __timer.fireDate = Date.distantFuture
+            status = .pause
+        }
+    }
+    
+    open func resume() {
+        if let __timer = timer {
+            __timer.fireDate = Date.distantPast
+            status = .working
+        }
     }
     
     

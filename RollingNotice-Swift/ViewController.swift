@@ -53,6 +53,19 @@ class ViewController: UIViewController {
     
     
     
+    @IBAction func handleBtnAction(_ sender: UIButton) {
+        guard let notice0 = noticeView0 else {
+            return
+        }
+        
+        if notice0.status == .working {
+            notice0.pause()
+            sender.setTitle("Resume", for: .normal)
+        }else if notice0.status != .working {
+            notice0.resume()
+            sender.setTitle("Pause", for: .normal)
+        }
+    }
     
     
 }
