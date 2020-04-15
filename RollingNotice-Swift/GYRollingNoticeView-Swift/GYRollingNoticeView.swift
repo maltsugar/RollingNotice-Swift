@@ -24,8 +24,20 @@ open class GYRollingNoticeView: UIView {
     weak open var dataSource : GYRollingNoticeViewDataSource?
     weak open var delegate : GYRollingNoticeViewDelegate?
     open var stayInterval = 2.0
-    open private(set) var currentIndex = 0
     open private(set) var status: GYRollingNoticeViewStatus = .idle
+    open var currentIndex: Int {
+        guard let count = (self.dataSource?.numberOfRowsFor(roolingView: self)) else { return 0}
+        
+        if (_cIdx > count - 1) {
+            _cIdx = 0
+        }
+        return _cIdx;
+    }
+    
+    
+    private var _cIdx = 0
+    private var _needTryRoll = false
+    
     
     // MARK: private properties
     private lazy var cellClsDict: Dictionary = { () -> [String : Any] in
@@ -110,7 +122,7 @@ open class GYRollingNoticeView: UIView {
         
         status = .idle
         isAnimating = false
-        currentIndex = 0
+        _cIdx = 0
         currentCell?.removeFromSuperview()
         willShowCell?.removeFromSuperview()
         currentCell = nil
@@ -145,6 +157,13 @@ open class GYRollingNoticeView: UIView {
     
     override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
     }
+    open override func layoutSubviews() {
+        super.layoutSubviews()
+        if (_needTryRoll) {
+            self.reloadDataAndStartRoll()
+            _needTryRoll = false
+        }
+    }
     
 }
 
@@ -156,7 +175,7 @@ extension GYRollingNoticeView{
             return
         }
         layoutCurrentCellAndWillShowCell()
-        currentIndex += 1
+        
         
         let w = self.frame.size.width
         let h = self.frame.size.height
@@ -172,6 +191,7 @@ extension GYRollingNoticeView{
                 self.currentCell = cell1
             }
             self.isAnimating = false
+            self._cIdx += 1
         }
     }
     
@@ -179,25 +199,30 @@ extension GYRollingNoticeView{
     fileprivate func layoutCurrentCellAndWillShowCell() {
         guard let count = (self.dataSource?.numberOfRowsFor(roolingView: self)) else { return }
         
-        if (currentIndex > count - 1) {
-            currentIndex = 0
+        if (_cIdx > count - 1) {
+            _cIdx = 0
         }
         
-        var willShowIndex = currentIndex + 1
+        var willShowIndex = _cIdx + 1
         if (willShowIndex > count - 1) {
             willShowIndex = 0
         }
-        //    print(">>>>%d", currentIndex)
+        //    print(">>>>%d", _cIdx)
         
         let w = self.frame.size.width
         let h = self.frame.size.height
         
-//        print("count: \(count),  currentIndex:\(currentIndex)  willShowIndex: \(willShowIndex)")
+//        print("count: \(count),  _cIdx:\(_cIdx)  willShowIndex: \(willShowIndex)")
+        
+        if !(w > 0 && h > 0) {
+            _needTryRoll = true
+            return
+        }
         
         if currentCell == nil {
             // 第一次没有currentcell
             // currentcell is null at first time
-            if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: currentIndex) {
+            if let cell = self.dataSource?.rollingNoticeView(roolingView: self, cellAtIndex: _cIdx) {
                 currentCell = cell
                 cell.frame  = CGRect(x: 0, y: 0, width: w, height: h)
                 self.addSubview(cell)
@@ -237,14 +262,7 @@ extension GYRollingNoticeView{
     }
     
     @objc fileprivate func handleCellTapAction(){
-        guard let count = self.dataSource?.numberOfRowsFor(roolingView: self) else {
-            return
-        }
-        
-        if (currentIndex > count - 1) {
-            currentIndex = 0;
-        }
-        self.delegate?.rollingNoticeView?(self, didClickAt: currentIndex)
+        self.delegate?.rollingNoticeView?(self, didClickAt: self.currentIndex)
     }
     
     fileprivate func setupNoticeViews() {
